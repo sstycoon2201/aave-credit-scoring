@@ -71,7 +71,9 @@ We score each wallet using behavioral patterns — e.g., repayments vs. borrowin
 
 ## 🧮 How to Run
 
-run python wallet_credit_score.py
+```bash
+
+python wallet_credit_score.py
 
 ### Requirements
 
@@ -81,6 +83,7 @@ run python wallet_credit_score.py
 
 Install dependencies:
 ```bash
+
 pip install pandas matplotlib
 
 
