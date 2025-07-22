@@ -1,3 +1,13 @@
+aave-credit-scoring/
+│
+├── wallet_credit_score.py        # Credit scoring script
+├── transactions.json             # Input data (subset/sample)
+├── wallet_scores.json            # Output scores
+├── score_buckets.json            # Score range buckets
+├── score_distribution.png        # Distribution chart
+├── README.md                     # This file
+├── analysis.md                   # Score analysis & graphs
+
 # aave-credit-scoring
 Internship assignment for Zeru AI engineering Internship
 
