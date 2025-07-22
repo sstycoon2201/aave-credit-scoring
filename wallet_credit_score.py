@@ -101,3 +101,71 @@ with open("score_buckets.json", "w") as f:
     json.dump(bucket_counts, f, indent=2)
 
 print("\n📁 Bucket stats saved to 'score_buckets.json'")
+
+import json
+import matplotlib.pyplot as plt
+
+# Step 1: Load the score bucket data
+with open('score_buckets.json', 'r') as f:
+    score_buckets = json.load(f)
+
+# Step 2: Plot the score distribution
+bucket_labels = list(score_buckets.keys())
+bucket_counts = list(score_buckets.values())
+
+plt.figure(figsize=(10, 6))
+plt.bar(bucket_labels, bucket_counts, color='skyblue', edgecolor='black')
+plt.xlabel('Credit Score Ranges')
+plt.ylabel('Number of Wallets')
+plt.title('Wallet Credit Score Distribution')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('score_distribution.png')
+plt.close()
+
+# Step 3: Generate markdown report content
+analysis_md = f"""# 📊 Aave Wallet Credit Score – Analysis Report
+
+This report summarizes the wallet credit scores based on transaction behavior on Aave V2 protocol.
+
+## 🔢 Score Distribution Table
+
+| Score Range | Wallet Count |
+|-------------|--------------|
+"""
+
+for bucket_label, count in score_buckets.items():
+    analysis_md += f"| {bucket_label:<11} | {count} wallets    |\n"
+
+# Step 4: Add analysis insights
+analysis_md += """
+
+## 🧠 Observations
+
+- **Low Score Wallets (0–300)**:
+  - Tend to have bot-like or exploitative behavior.
+  - May frequently interact only for liquidations or use minimal repay activity.
+  - Often exhibit inconsistent borrowing or short-term deposits.
+
+- **Mid Score Wallets (400–700)**:
+  - Demonstrate average behavior.
+  - Engage in lending and borrowing but may lack strong repayment consistency.
+  - Have moderate liquidation exposure.
+
+- **High Score Wallets (800–1000)**:
+  - Show consistent and responsible usage (e.g. full repay, long-term deposits).
+  - Minimal to no liquidation events.
+  - Likely real, healthy users contributing to protocol stability.
+
+## 📈 Score Distribution Plot
+
+![Score Distribution](score_distribution.png)
+
+"""
+
+# Step 5: Save to analysis.md
+with open('analysis.md', 'w', encoding='utf-8') as f:
+    f.write(analysis_md)
+
+print("✅ analysis.md successfully generated with plot and insights.")
+
