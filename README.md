@@ -71,6 +71,8 @@ We score each wallet using behavioral patterns — e.g., repayments vs. borrowin
 
 ## 🧮 How to Run
 
+run python wallet_credit_score.py
+
 ### Requirements
 
 - Python 3.x
